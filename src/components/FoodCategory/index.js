@@ -1,8 +1,8 @@
 import React from 'react';
 import * as S from './styles'
-export default function FoodCategory({item, selectedCategory}) {
+export default function FoodCategory({item, selectedCategory, changeFoodCategory}) {
     return (
-        <S.Container >
+        <S.Container selected={selectedCategory == item.description} onPress={() => changeFoodCategory(item.description)} >
           {item.icon}
         </S.Container>
     );

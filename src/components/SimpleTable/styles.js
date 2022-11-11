@@ -32,7 +32,7 @@ export const Char = styled.View`
     border-bottom-right-radius: ${CONTAINER_WIDTH / 2.5}px;
 `
 export const Number = styled.Text`
-    font-size: 20px;
+    font-size: ${CONTAINER_WIDTH / 1.2}px;
     color: #fff;
     position: absolute;
     top: 35%;

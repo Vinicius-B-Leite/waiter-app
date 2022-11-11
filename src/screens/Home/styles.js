@@ -27,24 +27,6 @@ export const MenuRow = styled.View`
     background-color: #d3d3d3;
 `
 
-export const InputArea = styled.View`
-    flex-direction: row;
-    align-items: center;
-    background-color: #363636;
-    margin: ${width / 40}px;
-    paddingHorizontal: ${width / 30}px;
-    border-radius: ${height / 53}px;
-`
-export const Input = styled.TextInput`
-    margin-left: 3%;
-`
-
-export const FoodCategoryList = styled.View`
-    width: 100%;
-    marginVertical: 5%;
-    align-items: center;
-`
-
 export const Menufood = styled.View`
     flex: 1;
     margin: 5%;
