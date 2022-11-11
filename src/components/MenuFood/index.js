@@ -16,7 +16,7 @@ export default function MenuFood({item}) {
             />
             <S.Name numberOfLines={1} >{item?.name}</S.Name>
             {/* <S.Description>{item?.description}</S.Description> */}
-            <S.Price>R$ {item?.price.toFixed(2).replace('.', ',')}</S.Price>
+            <S.Price>R$ {item?.price?.toFixed(2).replace('.', ',')}</S.Price>
             <S.AddCart>
                 <Ionicons name='add-circle-sharp' size={18}/>
                 <S.Quantity>0</S.Quantity>
