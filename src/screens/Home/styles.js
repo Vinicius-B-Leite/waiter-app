@@ -54,3 +54,23 @@ export const FoodCategoryList = styled.View`
     margin-top: 6%;
     align-items: center;
 `
+
+export const FloatButton = styled.TouchableOpacity.attrs({
+    activeOpacity: 0.9
+})`
+    background-color: #f97e20;
+    justify-content: center;
+    align-items: center;
+    padding: 3%;
+    border-radius: ${width}px;
+    position: absolute;
+    bottom: 20px;
+    width: 90%;
+    left: 5%;
+    z-index: 2;
+`
+
+export const TextFloatButton = styled.Text`
+    font-size: 18px;
+    color: #fff;
+`

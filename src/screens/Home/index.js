@@ -15,16 +15,14 @@ import Foundation from 'react-native-vector-icons/Foundation'
 const { width, height } = Dimensions.get('screen')
 
 
-export default function Home() {
+export default function Home({navigation}) {
 
     const [selectedCategory, setSelectedCategory] = useState('Hamburger')
     const scrollY = useRef(new Animated.Value(0)).current
-    const inputRef = useRef()
 
     const [foods, setFoods] = useState(menuFood)
     const [searchItens, setSearchItens] = useState('')
     const [searchInput, setSearchInput] = useState('')
-    const [selectedItens, setSelectedItens] = useState([])
 
 
     const handleSearch = () => {
@@ -83,16 +81,13 @@ export default function Home() {
                     <S.MenuRow />
                     <S.MenuRow />
                 </S.Menu>
-                <View style={{ flexDirection: 'row', width: '20%', justifyContent: 'space-between' }}>
-                    <TouchableOpacity><Foundation name='clipboard-notes' size={27} color='#f97e20' /></TouchableOpacity>
-                    <TouchableOpacity><Entypo name='shopping-cart' size={27} color='#d3d3d3' /></TouchableOpacity>
-                </View>
+                <TouchableOpacity><Entypo name='shopping-cart' size={27} color='#d3d3d3' /></TouchableOpacity>
             </S.Header>
 
             <Animated.View
                 style={{
                     marginTop: scrollY.interpolate({
-                        inputRange: [0, 40, 80, 110, 140, 180],
+                        inputRange: [0, 60, 100, 130, 180, 210],
                         outputRange: ['5%', '0%', '-5%', '-10%', '-15%', '-21%'],
                         extrapolate: 'clamp'
                     }),
@@ -102,7 +97,6 @@ export default function Home() {
                 <S.InputArea>
                     <Feather name='search' size={21} />
                     <S.Input
-                        ref={inputRef}
                         placeholder='Pesquisar'
                         value={searchInput}
                         onChangeText={(text) => {
@@ -152,6 +146,10 @@ export default function Home() {
                     )}
                 />
             </S.Menufood>
+
+            <S.FloatButton onPress={() => navigation.navigate('Cart')}>
+                <S.TextFloatButton>Adionar ao pedido</S.TextFloatButton>
+            </S.FloatButton>
         </S.Container>
     );
 }
