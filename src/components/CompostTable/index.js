@@ -1,23 +1,44 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, View } from 'react-native';
+import { TablesContext } from '../../contexts/tablesContext';
 
 import * as S from './styles'
-export default function CompostTable({number}) {
-    console.log("🚀 ~ file: index.js ~ line 6 ~ CompostTable ~ number", number)
+export default function CompostTable({number, tablesProps}) {
+
+    const { tablesSelecteds } = useContext(TablesContext)
+    const isSelected =  tablesSelecteds.includes(number.toString())
+    const isSelecting = tablesProps?.idTableSelected?.toString() == number.toString()
+
+
     return (
-        <S.Container>
-            <S.Number>{number}</S.Number>
+        <S.Container onPress={() => tablesProps?.setIdTableSelected(number.toString())}>
+
+            <S.Number 
+                isSelected={isSelected}>{number}</S.Number>
+
             <S.Chars>
-                <S.Char/>
-                <S.Char/>
-                <S.Char/>
+                {
+                    [1, 2, 3].map(i => <S.Char key={i} 
+                        isSelected={isSelected}
+                        isSelecting={isSelecting}/>)
+                }
             </S.Chars>
-            <S.Table/>
+
+            <S.Table 
+                isSelected={isSelected}
+                isSelecting={isSelecting}        
+            />
+
             <S.Chars>
-                <S.Char rotate={true}/>
-                <S.Char rotate={true}/>
-                <S.Char rotate={true}/>
+                {
+                    [0, 1, 2].map(i => <S.Char key={i}
+                        rotate={true} 
+                        isSelected={isSelected}
+                        isSelecting={isSelecting}    
+                    />)
+                }
             </S.Chars>
+            
         </S.Container>
     );
 }

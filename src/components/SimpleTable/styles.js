@@ -6,7 +6,7 @@ const { width, height } = Dimensions.get('screen')
 
 const CONTAINER_WIDTH = width / 15
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
     width: ${CONTAINER_WIDTH}%;
     height: 90%;
     flex-direction: row;
@@ -17,7 +17,12 @@ export const Container = styled.View`
 `;
 
 export const Table = styled.View`
-    background-color: #474747;
+    ${props => props.isSelecting ? css`
+        background-color: #f97e20 ;
+    `: css`
+        background-color: ${props.isSelected ? '#171717' : '#474747'} ;
+    
+    `}
     margin: 5% 0;   
     height: 90%;
     width: 60%;
@@ -25,7 +30,12 @@ export const Table = styled.View`
 `
 
 export const Char = styled.View`
-    background-color: #474747;
+    ${props => props.isSelecting ? css`
+        background-color: #f97e20 ;
+    `: css`
+        background-color: ${props.isSelected ? '#171717' : '#474747'} ;
+    
+    `}
     height: 25%;
     width: 50%;
     border-top-right-radius: ${CONTAINER_WIDTH / 2.5}px;
@@ -33,7 +43,7 @@ export const Char = styled.View`
 `
 export const Number = styled.Text`
     font-size: ${CONTAINER_WIDTH / 1.2}px;
-    color: #fff;
+    color: ${props => props.isSelected ? '#474747' : '#fff'};
     position: absolute;
     top: 35%;
     left: 25%;

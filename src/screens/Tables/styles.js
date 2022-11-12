@@ -18,7 +18,7 @@ export const Header = styled.View`
 `
 export const MainRoom = styled.View`
     background-color: #f97e20;
-    padding: 4.8%;
+    padding: 3%;
     width: 60%;
     justify-content: center;
     align-items: center;
@@ -27,13 +27,13 @@ export const MainRoom = styled.View`
 `
 export const SecondRoom = styled.View`
     background-color: #171717;
-    padding: ${height / 45}px;
+    padding: ${height / 60}px;
     width: ${width / 1.8}px;
     justify-content: center;
     align-items: center;
     position: absolute;
     right: 3%;
-    top: 31.5%;
+    top: 38%;
     border-radius: ${width / 5}px;
 
 `
@@ -52,4 +52,24 @@ export const Row = styled.View`
     margin: 5%;
     justify-content: space-between;
     align-items: center;
+`
+
+export const SelectTableButton = styled.TouchableOpacity`
+    width: 90%;
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+    background-color: transparent;
+    border-width: 2px;
+    border-color: #f97e20;
+    justify-content: center;
+    align-items: center;
+    padding: 5%;
+    border-radius: ${width}px;
+`
+
+export const TextSelectedTableButton = styled.Text`
+    color: #f97e20;
+    font-size: 18px;
+    font-weight: bold;
 `

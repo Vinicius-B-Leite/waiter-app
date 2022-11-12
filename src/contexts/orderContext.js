@@ -16,6 +16,11 @@ export default function OrderContextProvider({ children }) {
     const [totalValue, setTotalValue] = useState(0)
     const [allItens, setAllItens] = useState()
 
+    const handleAddOrder = (chair, typeChair, totalValue, itens) => {
+        let keys = ['Hamburger', 'Drinks', 'FrenchFries', 'Dessert']
+        //setOrder({chair, typeChair, totalValue, hamburger, drink, frenchFries, dessert})
+    }
+
     const handleAddItem = (item) => {
 
         setOrder(oldO => {
@@ -81,7 +86,7 @@ export default function OrderContextProvider({ children }) {
 
 
     return (
-        <OrderContext.Provider value={{ order, setOrder, handleAddItem, totalValue, allItens, hadleRemoveItem }}>
+        <OrderContext.Provider value={{ order, setOrder, handleAddItem, totalValue, allItens, hadleRemoveItem, handleAddOrder }}>
             {children}
         </OrderContext.Provider>
     );

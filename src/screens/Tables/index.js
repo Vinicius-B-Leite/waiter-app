@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import CompostTable from '../../components/CompostTable';
 import SimpleTable from '../../components/SimpleTable';
+import { TablesContext } from '../../contexts/tablesContext';
 import * as S from './styles'
 
-export default function Tables() {
+export default function Tables({ route, navigation }) {
+
+  const selectTable = route?.params?.selectTable
+
+  const [idTableSelected, setIdTableSelected] = useState('')
+  const { handleSelectTable } = useContext(TablesContext)
+  const tablesProps = selectTable ? {
+    idTableSelected,
+    setIdTableSelected
+  } : {}
+
   return (
     <S.Container>
       <S.Header>
@@ -16,21 +27,30 @@ export default function Tables() {
         </S.SecondRoom>
       </S.Header>
       <S.Row>
-        <SimpleTable number={1}/>
-        <CompostTable number={2}/>
-        <SimpleTable rotate={true} number={3}/>
+        <SimpleTable number={1} tablesProps={tablesProps}/>
+        <CompostTable number={2} tablesProps={tablesProps}/>
+        <SimpleTable rotate={true} tablesProps={tablesProps} number={3}/>
       </S.Row>
       <S.Row>
-        <SimpleTable number={4}/>
-        <CompostTable number={5}/>
-        <SimpleTable rotate={true} number={6}/>
+        <SimpleTable number={4} tablesProps={tablesProps} />
+        <CompostTable number={5} tablesProps={tablesProps} />
+        <SimpleTable rotate={true} tablesProps={tablesProps} number={6} />
       </S.Row>
       <S.Row>
-        <SimpleTable number={7}/>
-        <CompostTable number={8}/>
-        <SimpleTable rotate={true} number={9}/>
+        <SimpleTable number={7} tablesProps={tablesProps} />
+        <CompostTable number={8} tablesProps={tablesProps} />
+        <SimpleTable rotate={true} tablesProps={tablesProps} number={9} />
       </S.Row>
+
+      {
+        selectTable && <S.SelectTableButton onPress={() => {
+          handleSelectTable(idTableSelected)
+          navigation.goBack()
+        }}>
+          <S.TextSelectedTableButton>Selecionar mesa</S.TextSelectedTableButton>
+        </S.SelectTableButton>
+      }
     </S.Container>
-      
+
   );
 }

@@ -15,7 +15,7 @@ export default function WaitingItem({item}) {
         return total
     }
 
-    let totalItens = getItensQuantity('hamburgers') + getItensQuantity('drinks') + getItensQuantity('frenchFries') + getItensQuantity('dessert')
+    let totalItens = getItensQuantity('Hamburgers') + getItensQuantity('Drinks') + getItensQuantity('DrenchFries') + getItensQuantity('Dessert')
     return (
         <S.Container>
             <S.ChairNumber>{item?.chair}</S.ChairNumber>

@@ -3,13 +3,23 @@ import { Dimensions, Text, TouchableOpacity, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import OrderItem from '../../components/OrderItem';
 import { OrderContext } from '../../contexts/orderContext';
+import { TablesContext } from '../../contexts/tablesContext';
 import * as S from './styles'
 
 
 export default function Cart({ navigation }) {
-    const { totalValue, allItens } = useContext(OrderContext)
-    const [data, setData] = useState([...allItens])
+    const { totalValue, allItens, handleAddOrder, } = useContext(OrderContext)
+    const { selectATable } = useContext(TablesContext)
 
+    const handleNavigatioOrAddOrder = () => {
+        
+        if (allItens.length > 0 && selectATable)  {
+            handleAddOrder(selectATable.id, selectATable.type, totalValue, allItens)
+        }else{
+            navigation.navigate('Tables', {selectTable: true})
+        }
+        
+    }
 
     return (
         <S.Container>
@@ -30,8 +40,8 @@ export default function Cart({ navigation }) {
                 <S.TotalValue>R$ {totalValue.toFixed(2).replace('.', ',')}</S.TotalValue>
             </S.ValueContainer>
 
-            <S.ButtonGoToTables>
-                <S.TextGoToTables>Selecionar mesa</S.TextGoToTables>
+            <S.ButtonGoToTables onPress={() => handleNavigatioOrAddOrder()}>
+                <S.TextGoToTables>{selectATable ? 'Concluir pedido' : 'Selecionar mesa'}</S.TextGoToTables>
             </S.ButtonGoToTables>
         </S.Container>
     );

@@ -63,7 +63,7 @@ export default function Routes() {
 function HomeRoute({navigation, route}){
     useLayoutEffect(() => {
         const routeName = getFocusedRouteNameFromRoute(route);
-        if(['Cart'].includes(getFocusedRouteNameFromRoute(route))){
+        if(['CartRoute'].includes(getFocusedRouteNameFromRoute(route))){
             navigation.setOptions({tabBarStyle: {display: 'none'}});
            } else {
            navigation.setOptions(TAB_BAR_OPTIONS);
@@ -73,7 +73,17 @@ function HomeRoute({navigation, route}){
     return(
         <Stack.Navigator>
             <Stack.Screen name='Home' component={Home} options={{headerShown: false}}/>
-            <Stack.Screen name='Cart' component={Cart} options={{headerShown: false}}/>
+            <Stack.Screen name='CartRoute' component={CartRoute} options={{headerShown: false}}/>
+        </Stack.Navigator>
+    )
+}
+
+function CartRoute ({navigation, route}){
+    const Stack = createNativeStackNavigator()
+    return (
+        <Stack.Navigator screenOptions={{headerShown: false}}>
+            <Stack.Screen name='Cart' component={Cart} />
+            <Stack.Screen name='Tables' component={Tables} />
         </Stack.Navigator>
     )
 }

@@ -152,7 +152,7 @@ export default function Home({ navigation }) {
                 />
             </S.Menufood>
 
-            <S.FloatButton onPress={() => navigation.navigate('Cart')} justifyContent={totalValue > 0 ? 'space-between' : 'center'}>
+            <S.FloatButton onPress={() => navigation.navigate('CartRoute')} justifyContent={totalValue > 0 ? 'space-between' : 'center'}>
                 <S.TextFloatButton >Adionar ao pedido</S.TextFloatButton>
                 <S.TotalValue>{totalValue > 0 ? 'R$ ' + totalValue.toFixed(2).replace('.', ','):''}</S.TotalValue>
             </S.FloatButton>
