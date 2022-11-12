@@ -2,15 +2,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as S from './styles'
 import Entypo from 'react-native-vector-icons/Entypo'
 
-import { Dimensions, FlatList, View, Animated } from 'react-native';
-import MenuFood from '../../components/MenuFood';
+import { Dimensions, FlatList, View, Animated, TouchableOpacity } from 'react-native';
+import ItemMenuFood from '../../components/ItemMenuFood';
 import { menuFood } from '../../data';
 import Feather from 'react-native-vector-icons/Feather'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import FoodCategory from '../../components/FoodCategory'
-
+import Foundation from 'react-native-vector-icons/Foundation'
 
 const { width, height } = Dimensions.get('screen')
 
@@ -24,6 +24,7 @@ export default function Home() {
     const [foods, setFoods] = useState(menuFood)
     const [searchItens, setSearchItens] = useState('')
     const [searchInput, setSearchInput] = useState('')
+    const [selectedItens, setSelectedItens] = useState([])
 
 
     const handleSearch = () => {
@@ -73,7 +74,6 @@ export default function Home() {
     const changeFoodCategory = (description) => {
         setSelectedCategory(description)
     }
-    console.log(inputRef?.current?.isFocused(), searchItens, foods[selectedCategory])
 
     return (
         <S.Container>
@@ -83,7 +83,10 @@ export default function Home() {
                     <S.MenuRow />
                     <S.MenuRow />
                 </S.Menu>
-                <Entypo name='shopping-cart' size={27} color='#d3d3d3' />
+                <View style={{ flexDirection: 'row', width: '20%', justifyContent: 'space-between' }}>
+                    <TouchableOpacity><Foundation name='clipboard-notes' size={27} color='#f97e20' /></TouchableOpacity>
+                    <TouchableOpacity><Entypo name='shopping-cart' size={27} color='#d3d3d3' /></TouchableOpacity>
+                </View>
             </S.Header>
 
             <Animated.View
@@ -120,7 +123,7 @@ export default function Home() {
                         zIndex: 2
                     }}
                     data={searchInput?.length > 0 ? searchItens : foods[selectedCategory]}
-                    renderItem={({ item }) => <MenuFood item={item} />}
+                    renderItem={({ item }) => <ItemMenuFood item={item} setFoods={setFoods} />}
                     numColumns={2}
                     showsVerticalScrollIndicator={false}
                     ItemSeparatorComponent={() => <View style={{ width: 40 }} />}
