@@ -59,20 +59,20 @@ export const menuFood = {
     ],
     'Bebidas': [
         {
-            id: '1',
+            id: '8',
             name: 'Coca-Cola lata',
             description: '',
             image: require('../assets/coca-cola-lata.png'),
             price: 5,
-            type: 'Bebidas'
+            type: 'Drinks'
         },
         {
-            id: '2',
+            id: '9',
             name: 'Pepsi lata',
             description: '',
             image: require('../assets/pepsi-lata.png'),
             price: 5,
-            type: 'Bebidas'
+            type: 'Drinks'
         },
     ]
 }

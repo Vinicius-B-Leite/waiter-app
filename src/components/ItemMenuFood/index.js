@@ -12,8 +12,8 @@ import { OrderContext } from '../../contexts/orderContext';
 export default function ItemMenuFood({ item, setFoods }) {
 
     const { handleAddItem, order } = useContext(OrderContext)
-    const [quantity, setQuantity] = useState(order[order.indexOf(item)]?.quantity || 0)
-
+    let index = order[item.type]?.indexOf(item)
+    const [quantity, setQuantity] = useState(order[item.type][index]?.quantity || 0)
 
     return (
         <S.Container>

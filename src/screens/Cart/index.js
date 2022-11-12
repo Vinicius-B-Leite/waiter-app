@@ -7,8 +7,8 @@ import * as S from './styles'
 
 
 export default function Cart({ navigation }) {
-    const { order, getTotalValue } = useContext(OrderContext)
-    const [data, setData] = useState([...order])
+    const { totalValue, getAllItens } = useContext(OrderContext)
+    const [data, setData] = useState([...getAllItens()])
 
 
     return (
@@ -27,7 +27,7 @@ export default function Cart({ navigation }) {
 
             <S.ValueContainer>
                 <S.TotalValue>Total:</S.TotalValue>
-                <S.TotalValue>R$ {getTotalValue()}</S.TotalValue>
+                <S.TotalValue>R$ {totalValue.toFixed(2).replace('.', ',')}</S.TotalValue>
             </S.ValueContainer>
 
             <S.ButtonGoToTables>

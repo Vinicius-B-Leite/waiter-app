@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import * as S from './styles'
 import Entypo from 'react-native-vector-icons/Entypo'
 
@@ -11,14 +11,17 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import FoodCategory from '../../components/FoodCategory'
 import Foundation from 'react-native-vector-icons/Foundation'
+import { OrderContext } from '../../contexts/orderContext';
 
 const { width, height } = Dimensions.get('screen')
 
 
-export default function Home({navigation}) {
+export default function Home({ navigation }) {
 
     const [selectedCategory, setSelectedCategory] = useState('Hamburger')
     const scrollY = useRef(new Animated.Value(0)).current
+    const { totalValue } = useContext(OrderContext)
+
 
     const [foods, setFoods] = useState(menuFood)
     const [searchItens, setSearchItens] = useState('')
@@ -81,7 +84,9 @@ export default function Home({navigation}) {
                     <S.MenuRow />
                     <S.MenuRow />
                 </S.Menu>
-                <TouchableOpacity><Entypo name='shopping-cart' size={27} color='#d3d3d3' /></TouchableOpacity>
+                <TouchableOpacity>
+                    <Entypo name='shopping-cart' size={27} color='#d3d3d3' />
+                </TouchableOpacity>
             </S.Header>
 
             <Animated.View
@@ -147,8 +152,9 @@ export default function Home({navigation}) {
                 />
             </S.Menufood>
 
-            <S.FloatButton onPress={() => navigation.navigate('Cart')}>
-                <S.TextFloatButton>Adionar ao pedido</S.TextFloatButton>
+            <S.FloatButton onPress={() => navigation.navigate('Cart')} justifyContent={totalValue > 0 ? 'space-between' : 'center'}>
+                <S.TextFloatButton >Adionar ao pedido</S.TextFloatButton>
+                <S.TotalValue>{totalValue > 0 ? 'R$ ' + totalValue.toFixed(2).replace('.', ','):''}</S.TotalValue>
             </S.FloatButton>
         </S.Container>
     );

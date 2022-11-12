@@ -58,10 +58,11 @@ export const FoodCategoryList = styled.View`
 export const FloatButton = styled.TouchableOpacity.attrs({
     activeOpacity: 0.9
 })`
+    flex-direction: row;
     background-color: #f97e20;
-    justify-content: center;
+    justify-content: ${props => props.justifyContent};
     align-items: center;
-    padding: 3%;
+    padding: 3% 7%;
     border-radius: ${width}px;
     position: absolute;
     bottom: 20px;
@@ -73,4 +74,8 @@ export const FloatButton = styled.TouchableOpacity.attrs({
 export const TextFloatButton = styled.Text`
     font-size: 18px;
     color: #fff;
+`
+
+export const TotalValue =  styled(TextFloatButton)`
+
 `
