@@ -7,8 +7,8 @@ import * as S from './styles'
 
 
 export default function Cart({ navigation }) {
-    const { totalValue, getAllItens } = useContext(OrderContext)
-    const [data, setData] = useState([...getAllItens()])
+    const { totalValue, allItens } = useContext(OrderContext)
+    const [data, setData] = useState([...allItens])
 
 
     return (
@@ -21,7 +21,7 @@ export default function Cart({ navigation }) {
             </S.Header>
 
             <S.Itens
-                data={data}
+                data={allItens}
                 renderItem={({ item }) => <OrderItem item={item} />}
             />
 

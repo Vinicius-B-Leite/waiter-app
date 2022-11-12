@@ -11,7 +11,7 @@ import * as S from './styles'
 
 export default function OrderItem({ item }) {
 
-    const { handleAddItem } = useContext(OrderContext)
+    const { handleAddItem, hadleRemoveItem } = useContext(OrderContext)
 
     return (
         <S.Container>

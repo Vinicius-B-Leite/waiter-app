@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 
 
 import * as S from './styles'
@@ -6,14 +6,21 @@ import * as S from './styles'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { ImageBackground } from 'react-native';
 import { OrderContext } from '../../contexts/orderContext';
+import { useFocusEffect } from '@react-navigation/native';
 
 
 
-export default function ItemMenuFood({ item, setFoods }) {
+export default function ItemMenuFood({ item }) {
 
     const { handleAddItem, order } = useContext(OrderContext)
     let index = order[item.type]?.indexOf(item)
-    const [quantity, setQuantity] = useState(order[item.type][index]?.quantity || 0)
+    const [quantity, setQuantity] = useState(0)
+
+    useFocusEffect(
+        useCallback(() => {
+            setQuantity(order[item.type][index]?.quantity ? order[item.type][index]?.quantity : 0)
+        }, [])
+    )
 
     return (
         <S.Container>

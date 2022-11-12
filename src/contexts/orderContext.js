@@ -14,6 +14,7 @@ export default function OrderContextProvider({ children }) {
         Dessert: []
     })
     const [totalValue, setTotalValue] = useState(0)
+    const [allItens, setAllItens] = useState()
 
     const handleAddItem = (item) => {
 
@@ -32,6 +33,7 @@ export default function OrderContextProvider({ children }) {
             return oldO
         })
         getTotalValue()
+        getAllItens()
     }
 
     const hadleRemoveItem = (item) => {
@@ -39,11 +41,17 @@ export default function OrderContextProvider({ children }) {
 
             let index = oldO[item.type].indexOf(item)
 
+            if (item.quantity === 1){
+                oldO[item.type].splice(index, 1)
+                console.log("🚀 ~ file: orderContext.js ~ line 46 ~ hadleRemoveItem ~ oldO", oldO)
+                return oldO
+            }
             oldO[item.type][index].quantity = item.quantity - 1
 
             return oldO
         })
         getTotalValue()
+        getAllItens()
     }
 
     const getTotalValue = () => {
@@ -66,14 +74,14 @@ export default function OrderContextProvider({ children }) {
                 foods.push(food)
             })
         })
-        return foods
+        setAllItens(foods)
     }
 
 
 
 
     return (
-        <OrderContext.Provider value={{ order, setOrder, handleAddItem, totalValue, getAllItens, hadleRemoveItem }}>
+        <OrderContext.Provider value={{ order, setOrder, handleAddItem, totalValue, allItens, hadleRemoveItem }}>
             {children}
         </OrderContext.Provider>
     );
