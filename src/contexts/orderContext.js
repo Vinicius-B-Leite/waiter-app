@@ -4,6 +4,7 @@ export const OrderContext = createContext({})
 
 export default function OrderContextProvider({ children }) {
 
+    const [awaitingOrderList, setAwaitingOrderList] = useState([])
     const [order, setOrder] = useState({
         chair: '',
         typeChair: '',
@@ -16,9 +17,40 @@ export default function OrderContextProvider({ children }) {
     const [totalValue, setTotalValue] = useState(0)
     const [allItens, setAllItens] = useState()
 
-    const handleAddOrder = (chair, typeChair, totalValue, itens) => {
-        let keys = ['Hamburger', 'Drinks', 'FrenchFries', 'Dessert']
-        //setOrder({chair, typeChair, totalValue, hamburger, drink, frenchFries, dessert})
+    const handleAddOrder = (chair, typeChair, totalValue, itens, callback) => {
+        let Hamburger = itens.map(food => food.type === 'Hamburger' && (food))
+        let Drinks = itens.map(food => food.type === 'Drinks' && (food))
+        let FrenchFries = itens.map(food => food.type === 'FrenchFires' && (food))
+        let Dessert = itens.map(food => food.type === 'Dessert' && (food))
+
+        let data = {
+            chair,
+            typeChair,
+            totalValue,
+            Hamburger,
+            Drinks,
+            FrenchFries,
+            Dessert
+        }
+
+        setOrder(data)
+        setAwaitingOrderList(oldAOL => [...oldAOL, data])
+        cleanOrder()
+        callback()
+    }
+
+    const cleanOrder = () => {
+        setOrder({
+            chair: '',
+            typeChair: '',
+            totalValue: 0,
+            Hamburger: [],
+            Drinks: [],
+            FrenchFries: [],
+            Dessert: []
+        })
+        setAllItens(null)
+        setTotalValue(0)
     }
 
     const handleAddItem = (item) => {
@@ -46,7 +78,7 @@ export default function OrderContextProvider({ children }) {
 
             let index = oldO[item.type].indexOf(item)
 
-            if (item.quantity === 1){
+            if (item.quantity === 1) {
                 oldO[item.type].splice(index, 1)
                 console.log("🚀 ~ file: orderContext.js ~ line 46 ~ hadleRemoveItem ~ oldO", oldO)
                 return oldO
@@ -86,7 +118,7 @@ export default function OrderContextProvider({ children }) {
 
 
     return (
-        <OrderContext.Provider value={{ order, setOrder, handleAddItem, totalValue, allItens, hadleRemoveItem, handleAddOrder }}>
+        <OrderContext.Provider value={{ order, setOrder, handleAddItem, totalValue, allItens, hadleRemoveItem, handleAddOrder, awaitingOrderList }}>
             {children}
         </OrderContext.Provider>
     );

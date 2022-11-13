@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
 import SimpleTable from '../SimpleTable'
@@ -6,30 +6,45 @@ import CompostTable from '../CompostTable'
 
 
 import * as S from './styles'
-export default function WaitingItem({item}) {
-    const getItensQuantity = (local) =>{
+
+
+
+export default function WaitingItem({ item }) {
+    console.log("🚀 ~ file: index.js ~ line 13 ~ WaitingItem ~ item", item)
+    const [totalItens, setTotalItens] = useState()
+
+    const getItensQuantity = () => {
+        let keys = ['Hamburger', 'Drinks', 'FrenchFries', 'Dessert']
         let total = 0
-        item?.[local]?.forEach(i => {
-            total += i.quantity
+
+        keys.forEach(key => {
+            item[key]?.forEach(i => {
+                if (i) {
+                    total++
+                }
+            })
         })
         return total
     }
 
-    let totalItens = getItensQuantity('Hamburgers') + getItensQuantity('Drinks') + getItensQuantity('DrenchFries') + getItensQuantity('Dessert')
+    useEffect(() => {
+        setTotalItens(getItensQuantity())
+    }, [])
+
     return (
         <S.Container>
             <S.ChairNumber>{item?.chair}</S.ChairNumber>
-            <View style={{flex: 1}}>
+            <View style={{ flex: 1 }}>
                 <S.TotalValue>R$ {item?.totalValue.toFixed(2).replace('.', ',')}</S.TotalValue>
                 <S.Itens> {totalItens} iten(s)</S.Itens>
             </View>
             {
                 item?.typeChair === 'simple' ? (
-                    <SimpleTable number={''} rotate={item?.totalValue % 2 == 0 ? true : false}/>
+                    <SimpleTable number={''} rotate={item?.totalValue % 2 == 0 ? true : false} />
                 ) :
                     <CompostTable number={''} />
-            }   
+            }
         </S.Container>
-        
+
     );
 }

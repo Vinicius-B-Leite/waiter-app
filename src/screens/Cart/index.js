@@ -8,13 +8,15 @@ import * as S from './styles'
 
 
 export default function Cart({ navigation }) {
-    const { totalValue, allItens, handleAddOrder, } = useContext(OrderContext)
-    const { selectATable } = useContext(TablesContext)
+    const { totalValue, allItens, handleAddOrder} = useContext(OrderContext)
+    const { selectATable, cleanSelectedTable } = useContext(TablesContext)
 
     const handleNavigatioOrAddOrder = () => {
         
         if (allItens.length > 0 && selectATable)  {
-            handleAddOrder(selectATable.id, selectATable.type, totalValue, allItens)
+            handleAddOrder(selectATable['id'], selectATable['type'], totalValue, allItens, cleanSelectedTable)
+            navigation.navigate('WaitingList')
+            
         }else{
             navigation.navigate('Tables', {selectTable: true})
         }

@@ -3,42 +3,46 @@ import { Text, View } from 'react-native';
 import { TablesContext } from '../../contexts/tablesContext';
 
 import * as S from './styles'
-export default function CompostTable({number, tablesProps}) {
+export default function CompostTable({ number, tablesProps }) {
 
     const { tablesSelecteds } = useContext(TablesContext)
-    const isSelected =  tablesSelecteds.includes(number.toString())
+    const isSelected = tablesSelecteds.includes(number.toString())
     const isSelecting = tablesProps?.idTableSelected?.toString() == number.toString()
-
+    const handleSelectTable = () => {
+        if (tablesProps.setIdTableSelected) {
+            tablesProps.setIdTableSelected(number.toString())
+        }
+    }
 
     return (
-        <S.Container onPress={() => tablesProps?.setIdTableSelected(number.toString())}>
+        <S.Container onPress={() => handleSelectTable()}>
 
-            <S.Number 
+            <S.Number
                 isSelected={isSelected}>{number}</S.Number>
 
             <S.Chars>
                 {
-                    [1, 2, 3].map(i => <S.Char key={i} 
+                    [1, 2, 3].map(i => <S.Char key={i}
                         isSelected={isSelected}
-                        isSelecting={isSelecting}/>)
+                        isSelecting={isSelecting} />)
                 }
             </S.Chars>
 
-            <S.Table 
+            <S.Table
                 isSelected={isSelected}
-                isSelecting={isSelecting}        
+                isSelecting={isSelecting}
             />
 
             <S.Chars>
                 {
                     [0, 1, 2].map(i => <S.Char key={i}
-                        rotate={true} 
+                        rotate={true}
                         isSelected={isSelected}
-                        isSelecting={isSelecting}    
+                        isSelecting={isSelecting}
                     />)
                 }
             </S.Chars>
-            
+
         </S.Container>
     );
 }

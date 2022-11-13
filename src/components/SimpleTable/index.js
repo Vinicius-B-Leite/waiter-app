@@ -10,11 +10,16 @@ export default function SimpleTable({ rotate, number, tablesProps }) {
     const isSelected = tablesSelecteds.includes(number.toString())
     const isSelecting = tablesProps?.idTableSelected?.toString() === number.toString()
 
+    const handleSelectTable = () => {
+        if (tablesProps.setIdTableSelected){
+            tablesProps.setIdTableSelected(number.toString())
+        }
+    }
 
     return (
         <S.Container 
             rotate={rotate} 
-            onPress={() => tablesProps?.setIdTableSelected(number.toString())}
+            onPress={() => handleSelectTable()}
         >
             <S.Number 
                 rotate={rotate} 
